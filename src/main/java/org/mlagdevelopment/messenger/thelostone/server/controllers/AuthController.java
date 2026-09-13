@@ -2,10 +2,10 @@ package org.mlagdevelopment.messenger.thelostone.server.controllers;
 
 
 import jakarta.validation.Valid;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginResponse;
-import org.mlagdevelopment.messenger.thelostone.server.dto.RegisterRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.UserResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.LoginRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.LoginResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.RegisterRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.UserResponse;
 import org.mlagdevelopment.messenger.thelostone.server.service.JwtService;
 import org.mlagdevelopment.messenger.thelostone.server.service.UserService;
 import org.springframework.http.HttpStatus;

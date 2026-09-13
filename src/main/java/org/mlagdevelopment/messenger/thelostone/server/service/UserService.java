@@ -2,15 +2,13 @@ package org.mlagdevelopment.messenger.thelostone.server.service;
 
 
 import org.mlagdevelopment.messenger.thelostone.server.domain.User;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.RegisterRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.UserResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.LoginRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.RegisterRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.UserResponse;
 import org.mlagdevelopment.messenger.thelostone.server.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 public class UserService {

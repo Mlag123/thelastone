@@ -3,9 +3,8 @@ package org.mlagdevelopment.messenger.thelostone.server.service;
 import org.mlagdevelopment.messenger.thelostone.server.domain.Message;
 import org.mlagdevelopment.messenger.thelostone.server.domain.MessageType;
 import org.mlagdevelopment.messenger.thelostone.server.domain.User;
-import org.mlagdevelopment.messenger.thelostone.server.dto.ChatMessage;
-import org.mlagdevelopment.messenger.thelostone.server.dto.SendMessageRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.UserResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.ChatMessageResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.SendMessageRequest;
 import org.mlagdevelopment.messenger.thelostone.server.repository.MessageRepository;
 import org.mlagdevelopment.messenger.thelostone.server.repository.RoomMemberRepository;
 import org.mlagdevelopment.messenger.thelostone.server.repository.UserRepository;
@@ -45,7 +44,7 @@ public class MessageService {
         Message saved = messageRepository.save(message);
 
         User sender = userRepository.findById(senderId).orElseThrow();
-        ChatMessage dto  =new ChatMessage(
+        ChatMessageResponse dto  =new ChatMessageResponse(
                 saved.getId(),
                 saved.getRoomId(),
                 saved.getSenderId(),

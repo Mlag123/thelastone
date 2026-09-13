@@ -1,8 +1,8 @@
 package org.mlagdevelopment.messenger.thelostone.client.service;
 
 import com.google.gson.Gson;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.RegisterRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.LoginRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.RegisterRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;

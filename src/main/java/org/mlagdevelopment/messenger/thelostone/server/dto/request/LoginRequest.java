@@ -1,4 +1,4 @@
-package org.mlagdevelopment.messenger.thelostone.server.dto;
+package org.mlagdevelopment.messenger.thelostone.server.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

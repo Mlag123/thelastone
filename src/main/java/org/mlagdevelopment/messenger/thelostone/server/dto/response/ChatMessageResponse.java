@@ -1,8 +1,8 @@
-package org.mlagdevelopment.messenger.thelostone.server.dto;
+package org.mlagdevelopment.messenger.thelostone.server.dto.response;
 
 import java.time.Instant;
 
-public record ChatMessage(
+public record ChatMessageResponse(
         Long id,
         Long roomId,
         Long senderId,

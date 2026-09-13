@@ -2,13 +2,12 @@ package org.mlagdevelopment.messenger.thelostone.server.controllers;
 
 
 import jakarta.validation.Valid;
-import org.mlagdevelopment.messenger.thelostone.server.dto.CreateRoomRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.RoomResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.CreateRoomRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.RoomResponse;
 import org.mlagdevelopment.messenger.thelostone.server.service.JwtService;
 import org.mlagdevelopment.messenger.thelostone.server.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

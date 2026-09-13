@@ -1,4 +1,4 @@
-package org.mlagdevelopment.messenger.thelostone.server.dto;
+package org.mlagdevelopment.messenger.thelostone.server.dto.response;
 
 public record LoginResponse(
         String token,

@@ -2,21 +2,9 @@ package org.mlagdevelopment.messenger.thelostone;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jdk.jfr.ContentType;
 import org.mlagdevelopment.messenger.thelostone.client.service.UserAuthentication;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginRequest;
-import org.mlagdevelopment.messenger.thelostone.server.dto.LoginResponse;
-import org.mlagdevelopment.messenger.thelostone.server.dto.RegisterRequest;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClient;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.LoginRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.LoginResponse;
 
 public class AuthTest {
     private Gson gson = new GsonBuilder()

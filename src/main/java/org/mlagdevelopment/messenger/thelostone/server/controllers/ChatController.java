@@ -1,8 +1,7 @@
 package org.mlagdevelopment.messenger.thelostone.server.controllers;
 
-import org.mlagdevelopment.messenger.thelostone.server.dto.SendMessageRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.SendMessageRequest;
 import org.mlagdevelopment.messenger.thelostone.server.service.MessageService;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;

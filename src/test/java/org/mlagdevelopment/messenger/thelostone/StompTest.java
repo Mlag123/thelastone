@@ -3,8 +3,8 @@ package org.mlagdevelopment.messenger.thelostone;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.jspecify.annotations.Nullable;
-import org.mlagdevelopment.messenger.thelostone.server.dto.ChatMessage;
-import org.mlagdevelopment.messenger.thelostone.server.dto.SendMessageRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.ChatMessageResponse;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.SendMessageRequest;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.web.socket.WebSocketHttpHeaders;
@@ -59,12 +59,12 @@ public class StompTest {
 
                 @Override
                 public Type getPayloadType(StompHeaders headers) {
-                    return ChatMessage.class;
+                    return ChatMessageResponse.class;
                 }
 
                 @Override
                 public void handleFrame(StompHeaders headers, @Nullable Object payload) {
-                    ChatMessage msg = (ChatMessage) payload;
+                    ChatMessageResponse msg = (ChatMessageResponse) payload;
                     System.out.println("<< ["+msg.senderUiName()+"]: "+msg.content());
                 }
             });

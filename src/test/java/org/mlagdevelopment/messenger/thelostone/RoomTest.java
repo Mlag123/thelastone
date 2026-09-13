@@ -1,6 +1,6 @@
 package org.mlagdevelopment.messenger.thelostone;
 
-import org.mlagdevelopment.messenger.thelostone.server.dto.CreateRoomRequest;
+import org.mlagdevelopment.messenger.thelostone.server.dto.request.CreateRoomRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
@@ -29,7 +29,7 @@ public class RoomTest {
     }
 
 
-    
+
 
 
 
