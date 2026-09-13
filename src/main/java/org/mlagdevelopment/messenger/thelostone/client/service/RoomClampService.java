@@ -12,16 +12,14 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 
 import java.lang.reflect.Type;
-import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
-public class RoomControllerClient {
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+
+public class RoomClampService {
 
     public static String TEST_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwidXNlcm5hbWUiOiJURVNUTUxBRyIsImlhdCI6MTc4OTMxNTA1NiwiZXhwIjoxNzg5NDAxNDU2fQ.jnURq8o2hRjgnYb3RbjG9njK9wGdGCAs6r5SMP_if5A";
     private String url = "ws://localhost:8080/ws"; //HARDCODE!
-    public static String AUTHORIZATION = "Authorization";
     private final WebSocketStompClient client;
     private final JacksonJsonMessageConverter converter;
     private final JsonMapper mapper;
@@ -31,7 +29,7 @@ public class RoomControllerClient {
     private StompSession session;
     private Long currentRoomId;
 
-    public RoomControllerClient() {
+    public RoomClampService() {
         this.client = new WebSocketStompClient(new StandardWebSocketClient());
         client.setMessageConverter(new JacksonJsonMessageConverter());
         this.converter = new JacksonJsonMessageConverter();

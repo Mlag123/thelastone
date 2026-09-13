@@ -5,6 +5,7 @@ import org.mlagdevelopment.messenger.thelostone.server.domain.User;
 import org.mlagdevelopment.messenger.thelostone.server.dto.request.LoginRequest;
 import org.mlagdevelopment.messenger.thelostone.server.dto.request.RegisterRequest;
 import org.mlagdevelopment.messenger.thelostone.server.dto.response.UserResponse;
+import org.mlagdevelopment.messenger.thelostone.server.exception.UserNotFoundException;
 import org.mlagdevelopment.messenger.thelostone.server.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,16 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
     public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
-    public UserResponse register(RegisterRequest request) throws IllegalArgumentException  {
-        if(userRepository.existsByUsername(request.username())){
-            throw new IllegalArgumentException ("Username arleady taken");
+    public UserResponse register(RegisterRequest request) throws IllegalArgumentException {
+        if (userRepository.existsByUsername(request.username())) {
+            throw new IllegalArgumentException("Username arleady taken");
         }
 
         User user = new User();
@@ -42,9 +44,9 @@ public class UserService {
 
 
     @Transactional
-    public UserResponse authenticate(LoginRequest request){
-        if(!userRepository.existsByUsername(request.username())){
-            throw new IllegalArgumentException ("Invalid credentials");
+    public UserResponse authenticate(LoginRequest request) {
+        if (!userRepository.existsByUsername(request.username())) {
+            throw new IllegalArgumentException("Invalid credentials");
         }
 
         User user = userRepository.findByUsername(request.username()).get();
@@ -62,6 +64,18 @@ public class UserService {
         }
 
 
+    }
+
+    @Transactional(readOnly = true)
+    public UserResponse getUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getUiName(),
+                user.getCreatedAt()
+        );
     }
 
 
