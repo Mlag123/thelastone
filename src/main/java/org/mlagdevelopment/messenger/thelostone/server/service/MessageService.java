@@ -53,7 +53,7 @@ public class MessageService {
                 saved.getContent(),
                 saved.getCreatedAt()
         );
-        messagingTemplate.convertAndSend("/topic/room"+request.roomId(),dto);
+        messagingTemplate.convertAndSend("/topic/room."+request.roomId(),dto);
     }
 /*    public List<ChatMessage> getHistory(Long roomId, int limit) {
         return messageRepository.findTop50ByRoomIdOrderByCreatedAtDesc(roomId)

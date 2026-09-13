@@ -5,7 +5,7 @@ import java.time.Instant;
 public record ChatMessage(
         Long id,
         Long roomId,
-        Long sender_id,
+        Long senderId,
         String senderUiName,
         String content,
         Instant createdAt
