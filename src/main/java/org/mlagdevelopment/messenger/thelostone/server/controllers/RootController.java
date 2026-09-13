@@ -14,20 +14,20 @@ public class RootController {
 
     @GetMapping("/")
     public ResponseEntity<String> root(){
-        return ResponseEntity.ok("Hello World!");
+        return ResponseEntity.ok("root");
     }
     @GetMapping("/api")
     public ResponseEntity<String> rootApi(){
-        return ResponseEntity.ok("What are u doing?");
+        return ResponseEntity.ok("Root api. Check documentation");
     }
     @GetMapping("/furry")
     public ResponseEntity<String> furryEasterEgg(){
         String html = """
         <!DOCTYPE html>
         <html>
-        <head><title>Furry</title></head>
+        <head><title>Easter Egg</title></head>
         <body style="background:#111; color:#eee; text-align:center; font-family:sans-serif;">
-                <h1 class="rainbow">Developer</h1>
+                <h1 class="rainbow">MLag</h1>
                 
                                            <style>
                                            .rainbow {
@@ -51,6 +51,8 @@ public class RootController {
                                                100% { background-position: 200% 50%; }
                                            }
                                            </style>            <img src="/images/furry.gif" alt="furry" style="max-width:80vw; border-radius:16px;">
+                                           <h1>Congratulations! You find easter egg</h1>
+                                           <a href="https://github.com/Mlag123/thelastone">Github</a>
         </body>
         </html>
         """;
