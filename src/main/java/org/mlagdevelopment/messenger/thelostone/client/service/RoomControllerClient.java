@@ -19,12 +19,8 @@ import java.util.concurrent.TimeoutException;
 
 public class RoomControllerClient {
 
-
-
     public static String TEST_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwidXNlcm5hbWUiOiJURVNUTUxBRyIsImlhdCI6MTc4OTMxNTA1NiwiZXhwIjoxNzg5NDAxNDU2fQ.jnURq8o2hRjgnYb3RbjG9njK9wGdGCAs6r5SMP_if5A";
-
-    private String url = "ws://localhost:8080/ws";
-
+    private String url = "ws://localhost:8080/ws"; //HARDCODE!
     public static String AUTHORIZATION = "Authorization";
     private final WebSocketStompClient client;
     private final JacksonJsonMessageConverter converter;
@@ -32,6 +28,8 @@ public class RoomControllerClient {
 
     private final WebSocketHttpHeaders handshakeHeaders;
     private final StompHeaders connectHeaders;
+    private StompSession session;
+    private Long currentRoomId;
 
     public RoomControllerClient() {
         this.client = new WebSocketStompClient(new StandardWebSocketClient());
@@ -44,61 +42,54 @@ public class RoomControllerClient {
     }
 
 
-    public void connectToWebSocketRoom(String token,Long room) {
-        connectFromToken(token);
-
+    public void connect(String token) {
+        connectHeaders.add(AUTHORIZATION, "Bearer " + token);
         try {
-            StompSession session = client.connectAsync(url, handshakeHeaders, connectHeaders, new StompSessionHandlerAdapter() {
-                @Override
-                public void handleException(StompSession session, @Nullable StompCommand command, StompHeaders headers, byte[] payload, Throwable exception) {
-                    ClientMain.log.error("Transport error: "+exception.getMessage());
-                }
-
-                @Override
-                public void handleTransportError(StompSession session, Throwable exception) {
-                    ClientMain.log.info("STOMP exception: "+exception.getMessage());
-                }
+            this.session = client.connectAsync(url, handshakeHeaders, connectHeaders, new StompSessionHandlerAdapter() {
             }).get(5, TimeUnit.SECONDS);
+            ClientMain.log.info("Connected: {}", session.getSessionId());
+        } catch (Exception ex) {
+            ClientMain.log.error(ex.getMessage());
+        }
+    }
 
-            ClientMain.log.info("Connected: "+session.isConnected()+"\n Session id: "+session.getSessionId());
-            String roomDestination = "/topic/room."+room.toString();
-            session.subscribe(roomDestination, new StompFrameHandler() {
-                @Override
-                public Type getPayloadType(StompHeaders headers) {
-                    return ChatMessageResponse.class;
-                }
-
-                @Override
-                public void handleFrame(StompHeaders headers, @Nullable Object payload) {
-                    ChatMessageResponse msg = (ChatMessageResponse) payload;
-                    //DEBUG CODE!
-                    ClientMain.log.info("<<[{}]: {}", msg.senderUiName(), msg.content());
-                }
-            });
-
-            //DEBUG CODE!
-            Scanner scanner = new Scanner(System.in);
-            while (session.isConnected()){
-                String word = scanner.nextLine();
-                session.send("/app/chat.send",new SendMessageRequest(room,word));
+    public void subscribeToRoom(Long roomId) {
+        this.currentRoomId = roomId;
+        String roomDestination = "/topic/room." + roomId;
+        session.subscribe(roomDestination, new StompFrameHandler() {
+            @Override
+            public Type getPayloadType(StompHeaders headers) {
+                return ChatMessageResponse.class;
             }
 
+            @Override
+            public void handleFrame(StompHeaders headers, @Nullable Object payload) {
+                ChatMessageResponse msg = (ChatMessageResponse) payload;
 
+                ///debug code. Суть идеи такая, что при прихода сообщения, будет добавлятся в массив сообщений. Реализация будет на самом устройстве. Или тут. Подумаю.
+                ClientMain.log.info("<<[{}]: {}", msg.senderUiName(), msg.content());
 
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (TimeoutException e) {
-            throw new RuntimeException(e);
+            }
+        });
+        ClientMain.log.info("Subcribe to {}", roomDestination);
+    }
+
+    public void sendMessage(String content) {
+        if (session == null || !session.isConnected()) {
+            throw new IllegalStateException("Not a connect");
         }
-
+        if (currentRoomId == null) {
+            throw new IllegalStateException("Not in a room");
+        }
+        session.send("/app/chat.send", new SendMessageRequest(currentRoomId, content));
 
     }
 
-    private void connectFromToken(String token){
-        connectHeaders.add(AUTHORIZATION,"Bearer "+token);
+    public void disconnect() {
+        if (session != null && session.isConnected()) {
+            session.disconnect();
+            ClientMain.log.info("Disconnected");
+        }
     }
-
 
 }

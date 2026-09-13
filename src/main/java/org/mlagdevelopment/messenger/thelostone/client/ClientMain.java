@@ -1,7 +1,10 @@
 package org.mlagdevelopment.messenger.thelostone.client;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.mlagdevelopment.messenger.thelostone.client.service.RoomControllerClient;
+
+import java.util.Scanner;
 
 
 public class ClientMain {
@@ -13,6 +16,13 @@ public class ClientMain {
 
         RoomControllerClient roomControllerClient = new RoomControllerClient();
 
-            roomControllerClient.connectToWebSocketRoom(RoomControllerClient.TEST_TOKEN,4L);
+        roomControllerClient.connect(RoomControllerClient.TEST_TOKEN);
+        roomControllerClient.subscribeToRoom(4L);
+
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            String word = scanner.nextLine();
+            roomControllerClient.sendMessage(word);
+        }
     }
 }
