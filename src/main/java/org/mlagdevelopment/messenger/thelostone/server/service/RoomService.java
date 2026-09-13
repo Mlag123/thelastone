@@ -59,7 +59,7 @@ public class RoomService {
                 .toList();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public RoomResponse joinRoom(Long roomId,Long userId){
         Room room = roomRepository.findById(roomId).orElseThrow();
         if(!userRepository.existsById(userId)){

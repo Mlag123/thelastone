@@ -33,7 +33,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/getUser")
+    @PostMapping("/getUser")
     public ResponseEntity<UserResponse> getUserFromToken(@RequestHeader(AUTHORIZATION) String authHeader) {
         Long userId = extractUserId(authHeader);
         UserResponse response = service.getUserById(userId);

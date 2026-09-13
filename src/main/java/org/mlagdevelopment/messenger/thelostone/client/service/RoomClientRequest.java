@@ -14,7 +14,7 @@ public class RoomClientRequest {
 
     private final Gson gson;
 
-    private String ROOT_ROOM_URL = "http://127.0.0.1:8080/api/rooms";
+    private String ROOT_ROOM_URL = "http://127.0.0.1:8080/api/rooms/";
 
     public RoomClientRequest() {
         this.client = RestClient.create();
@@ -24,7 +24,7 @@ public class RoomClientRequest {
 
     public ResponseEntity<Void> joinRoom(Long roomId, String token){
         return client.post()
-                .uri("/api/rooms/"+roomId.toString()+"/join")
+                .uri(ROOT_ROOM_URL+roomId.toString()+"/join")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(AUTHORIZATION,"Bearer "+token)
                 .retrieve()

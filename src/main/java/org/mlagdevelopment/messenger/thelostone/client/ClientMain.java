@@ -4,6 +4,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.mlagdevelopment.messenger.thelostone.client.service.RoomClampService;
 import org.mlagdevelopment.messenger.thelostone.client.service.RoomClientRequest;
+import org.mlagdevelopment.messenger.thelostone.client.service.UserClientService;
+import org.mlagdevelopment.messenger.thelostone.server.dto.response.UserResponse;
 
 import java.util.Scanner;
 
@@ -29,10 +31,18 @@ public class ClientMain {
 
 
         RoomClampService second = new RoomClampService();
-//        clientRequest.joinRoom(4L);
+
+        UserClientService clientService = new UserClientService();
+
+        UserResponse _us = clientService.getUserIdFromToken(secondtoken).getBody();
+
+
+         clientRequest.joinRoom(4L,secondtoken);
+
         second.connect(secondtoken);
 
         second.subscribeToRoom(4L);
+
 
 
         while (true) {
