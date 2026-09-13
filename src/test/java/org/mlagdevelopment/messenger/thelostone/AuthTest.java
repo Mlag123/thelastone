@@ -28,7 +28,7 @@ public class AuthTest {
     private String login_url = "http://127.0.0.1:8080/api/auth/login";
     private UserAuthentication authentication = new UserAuthentication();
 
-    public void test() {
+    public String test() {
         System.out.println("Starting auth test");
         LoginRequest loginRequest = new LoginRequest("TESTMLAG", "pophop");
         System.out.println("Login: " + loginRequest.username() + " pass: " + loginRequest.password());
@@ -39,11 +39,12 @@ public class AuthTest {
             LoginResponse loginResponse = gson.fromJson(json_put, LoginResponse.class);
             System.out.println("token: " + loginResponse.token());
             System.out.println("PASS!");
+            return loginResponse.token();
         } else {
             System.out.println("Error code: " + code + " FAILED");
         }
 
-
+        return null;
     }
 
     public static void main(String[] args) {
