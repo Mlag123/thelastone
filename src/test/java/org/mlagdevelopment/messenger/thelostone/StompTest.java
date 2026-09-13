@@ -1,11 +1,12 @@
 package org.mlagdevelopment.messenger.thelostone;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.jspecify.annotations.Nullable;
 import org.mlagdevelopment.messenger.thelostone.server.dto.response.ChatMessageResponse;
 import org.mlagdevelopment.messenger.thelostone.server.dto.request.SendMessageRequest;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.converter.JacksonJsonMessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -20,13 +21,12 @@ public class StompTest {
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwidXNlcm5hbWUiOiJURVNUTUxBRyIsImlhdCI6MTc4OTMxNTA1NiwiZXhwIjoxNzg5NDAxNDU2fQ.jnURq8o2hRjgnYb3RbjG9njK9wGdGCAs6r5SMP_if5A";
 
         WebSocketStompClient client = new WebSocketStompClient(new StandardWebSocketClient());
-        client.setMessageConverter(new MappingJackson2MessageConverter());
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
+        client.setMessageConverter(new JacksonJsonMessageConverter());
+       // ObjectMapper mapper = new ObjectMapper();
+        //mapper.registerModule(new JavaTimeModule());
 
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-        converter.setObjectMapper(mapper);
-
+        JacksonJsonMessageConverter converter = new JacksonJsonMessageConverter();
+        JsonMapper mapper = JsonMapper.builder().build();
         client.setMessageConverter(converter);
         WebSocketHttpHeaders handshakeHeaders = new WebSocketHttpHeaders();
         StompHeaders connectHeaders = new StompHeaders();

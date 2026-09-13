@@ -1,7 +1,7 @@
 package org.mlagdevelopment.messenger.thelostone.server.service;
 
 import org.mlagdevelopment.messenger.thelostone.server.domain.Message;
-import org.mlagdevelopment.messenger.thelostone.server.domain.MessageType;
+import org.mlagdevelopment.messenger.thelostone.server.domain.types.MessageType;
 import org.mlagdevelopment.messenger.thelostone.server.domain.User;
 import org.mlagdevelopment.messenger.thelostone.server.dto.response.ChatMessageResponse;
 import org.mlagdevelopment.messenger.thelostone.server.dto.request.SendMessageRequest;

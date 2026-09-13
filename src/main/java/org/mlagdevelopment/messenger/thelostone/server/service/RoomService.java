@@ -3,7 +3,7 @@ package org.mlagdevelopment.messenger.thelostone.server.service;
 
 import org.mlagdevelopment.messenger.thelostone.server.domain.Room;
 import org.mlagdevelopment.messenger.thelostone.server.domain.RoomMember;
-import org.mlagdevelopment.messenger.thelostone.server.domain.RoomType;
+import org.mlagdevelopment.messenger.thelostone.server.domain.types.RoomType;
 import org.mlagdevelopment.messenger.thelostone.server.dto.request.CreateRoomRequest;
 import org.mlagdevelopment.messenger.thelostone.server.dto.response.RoomResponse;
 import org.mlagdevelopment.messenger.thelostone.server.repository.RoomMemberRepository;

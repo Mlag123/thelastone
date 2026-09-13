@@ -1,6 +1,7 @@
 package org.mlagdevelopment.messenger.thelostone.server.domain;
 
 import jakarta.persistence.*;
+import org.mlagdevelopment.messenger.thelostone.server.domain.types.RoomType;
 
 import java.time.Instant;
 
